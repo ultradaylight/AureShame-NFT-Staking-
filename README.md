@@ -1,2 +1,118 @@
-# AureShame-NFT-Staking-
-Stake AureShame NFTs and earn Aurelips tokens as rewards. 
+# AureShame NFT Staking Contract
+
+## Overview
+The **AureShame Staking Contract** allows users to stake their **AureShame NFTs** and earn **Aurelips tokens** as rewards. Users can claim rewards once per day and unstake their NFT at any time after a **24-hour minimum staking period**.
+
+## Features
+- **Stake AureShame NFTs** to earn Aurelips tokens.
+- **Claim rewards once every 24 hours**.
+- **Unstake at any time** after a minimum staking period.
+- **Automatic approval check** to ensure staking security.
+- **Emergency NFT withdrawal** (admin-only feature).
+- **Security measures** to prevent exploitation.
+
+## Smart Contract Details
+- **NFT Contract**: AureShame
+- **Reward Token Contract**: Aurelips
+- **Blockchain**: PulseChain
+
+## Contract Addresses
+- **AureShame NFT**: `0x658a0Ea978B79A156B130F36bBC6AE3b940BfA35`
+- **Aurelips Token**: `0x9A880e35fcbb1A080762A0Fe117105Ad5715B897`
+
+---
+
+## Functions
+
+### `approveForStaking()`
+**Allows the contract to stake your NFT** by setting approval for all.
+
+- **Caller**: NFT owner
+- **Requirements**:
+  - The user must own an AureShame NFT.
+  - Approval must not already be granted.
+
+### `stake(uint256 _tokenId)`
+**Stakes an AureShame NFT** and starts earning rewards.
+
+- **Caller**: NFT owner
+- **Requirements**:
+  - The user must own the NFT being staked.
+  - The user cannot stake more than one NFT at a time.
+  - Approval for the contract must be set.
+
+### `calculateRewards(address user)`
+**Returns the number of Aurelips tokens earned** since the last claim.
+
+- **Caller**: Anyone
+- **Returns**: `uint256` amount of claimable Aurelips tokens.
+
+### `claimRewards()`
+**Claims earned Aurelips tokens** once per day.
+
+- **Caller**: Staker
+- **Requirements**:
+  - The user must have a staked NFT.
+  - At least **24 hours** must have passed since the last claim.
+  - The contract must have enough Aurelips tokens in balance.
+
+### `unstake()`
+**Unstakes the NFT and claims any pending rewards.**
+
+- **Caller**: Staker
+- **Requirements**:
+  - The user must have an NFT staked.
+  - The NFT must be staked for at least **24 hours**.
+
+### `emergencyWithdrawNFT(uint256 _tokenId)`
+**Admin-only function to withdraw an NFT** from the contract in case of an emergency.
+
+- **Caller**: Owner
+- **Requirements**:
+  - The NFT must be staked in the contract.
+
+### `withdrawTokens(uint256 amount)`
+**Admin-only function to withdraw unclaimed Aurelips tokens** from the contract.
+
+- **Caller**: Owner
+- **Requirements**:
+  - The contract must have a sufficient Aurelips balance.
+
+---
+
+## Security Measures
+1. **Approval Check**: Ensures the user has granted permission to stake their NFT.
+2. **One NFT Per User**: Users can only stake one NFT at a time.
+3. **Minimum Staking Period**: Users must stake for at least **24 hours** before unstaking.
+4. **Reentrancy Protection**: Prevents exploitative attacks.
+5. **Emergency Withdrawal**: Allows admin to recover NFTs in case of failure.
+
+
+## Usage
+### 1. Approve Contract for Staking
+```solidity
+approveForStaking()
+```
+### 2. Stake Your NFT
+```solidity
+stake(tokenId)
+```
+### 3. Claim Rewards
+```solidity
+claimRewards()
+```
+### 4. Unstake NFT
+```solidity
+unstake()
+```
+
+## License
+This contract is licensed under **MIT License**.
+
+---
+
+
+
+
+
+

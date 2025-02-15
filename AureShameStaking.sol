@@ -11,7 +11,7 @@ interface IAureShame is IERC721 {
 }
 
 contract AureShameStaking is Ownable(0xCD11789CEf81Be2BCe676A34CC9331f8cE557116), ReentrancyGuard {
-    address public constant AURESHAME_NFT_ADDRESS = 0x658a0Ea978B79A156B130F36bBC6AE3b940BfA35;
+    address public constant AURESHAME_NFT_ADDRESS = 0xE0300Fb1A0ecB5C5B15c53e45de6a71ed66Af0d5;
     IAureShame public immutable nftContract = IAureShame(AURESHAME_NFT_ADDRESS);
     IERC20 public immutable rewardToken;
 
@@ -90,10 +90,6 @@ contract AureShameStaking is Ownable(0xCD11789CEf81Be2BCe676A34CC9331f8cE557116)
         emit Unstaked(msg.sender, stakeInfo.tokenId);
     }
 
-    function emergencyWithdrawNFT(uint256 _tokenId) external onlyOwner {
-        require(nftContract.ownerOf(_tokenId) == address(this), "NFT not in contract");
-        nftContract.transferFrom(address(this), owner(), _tokenId);
-    }
 
     function withdrawTokens(uint256 amount) external onlyOwner {
         require(rewardToken.balanceOf(address(this)) >= amount, "Insufficient balance");

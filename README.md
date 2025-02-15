@@ -8,7 +8,6 @@ The **AureShame Staking Contract** allows users to stake their **AureShame NFTs*
 - **Claim rewards once every 24 hours**.
 - **Unstake at any time** after a minimum staking period.
 - **Automatic approval check** to ensure staking security.
-- **Emergency NFT withdrawal** (admin-only feature).
 - **Security measures** to prevent exploitation.
 
 ## Smart Contract Details
@@ -23,14 +22,6 @@ The **AureShame Staking Contract** allows users to stake their **AureShame NFTs*
 ---
 
 ## Functions
-
-### `approveForStaking()`
-**Allows the contract to stake your NFT** by setting approval for all.
-
-- **Caller**: NFT owner
-- **Requirements**:
-  - The user must own an AureShame NFT.
-  - Approval must not already be granted.
 
 ### `stake(uint256 _tokenId)`
 **Stakes an AureShame NFT** and starts earning rewards.
@@ -63,13 +54,6 @@ The **AureShame Staking Contract** allows users to stake their **AureShame NFTs*
 - **Requirements**:
   - The user must have an NFT staked.
   - The NFT must be staked for at least **24 hours**.
-
-### `emergencyWithdrawNFT(uint256 _tokenId)`
-**Admin-only function to withdraw an NFT** from the contract in case of an emergency.
-
-- **Caller**: Owner
-- **Requirements**:
-  - The NFT must be staked in the contract.
 
 ### `withdrawTokens(uint256 amount)`
 **Admin-only function to withdraw unclaimed Aurelips tokens** from the contract.

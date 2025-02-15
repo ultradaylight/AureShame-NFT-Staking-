@@ -11,7 +11,8 @@ interface IAureShame is IERC721 {
 }
 
 contract AureShameStaking is Ownable, ReentrancyGuard {
-    IAureShame public immutable nftContract;
+    address public constant AURESHAME_NFT_ADDRESS = 0x658a0Ea978B79A156B130F36bBC6AE3b940BfA35;
+    IAureShame public immutable nftContract = IAureShame(AURESHAME_NFT_ADDRESS);
     IERC20 public immutable rewardToken;
 
     uint256 public constant REWARD_PER_DAY = 100 * 10**18; // Adjusted for Aurelips decimals
@@ -31,12 +32,9 @@ contract AureShameStaking is Ownable, ReentrancyGuard {
     event Unstaked(address indexed user, uint256 tokenId);
     event Claimed(address indexed user, uint256 amount);
 
-    constructor(address _nftAddress, address _rewardTokenAddress) {
-        require(_nftAddress != address(0) && _rewardTokenAddress != address(0), "Invalid contract address");
-        nftContract = IAureShame(_nftAddress);
+    constructor(address _rewardTokenAddress) {
+        require(_rewardTokenAddress != address(0), "Invalid reward token address");
         rewardToken = IERC20(_rewardTokenAddress);
-
-        require(keccak256(abi.encodePacked(nftContract.name())) == keccak256(abi.encodePacked("AureShame")), "Not AureShame NFT");
     }
 
     function approveForStaking() external {

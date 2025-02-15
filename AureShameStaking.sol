@@ -10,7 +10,7 @@ interface IAureShame is IERC721 {
     function name() external view returns (string memory);
 }
 
-contract AureShameStaking is Ownable, ReentrancyGuard {
+contract AureShameStaking is Ownable(0xCD11789CEf81Be2BCe676A34CC9331f8cE557116), ReentrancyGuard {
     address public constant AURESHAME_NFT_ADDRESS = 0x658a0Ea978B79A156B130F36bBC6AE3b940BfA35;
     IAureShame public immutable nftContract = IAureShame(AURESHAME_NFT_ADDRESS);
     IERC20 public immutable rewardToken;

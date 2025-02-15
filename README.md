@@ -18,6 +18,7 @@ The **AureShame Staking Contract** allows users to stake their **AureShame NFTs*
 ## Contract Addresses
 - **AureShame NFT**: `0x658a0Ea978B79A156B130F36bBC6AE3b940BfA35`
 - **Aurelips Token**: `0x9A880e35fcbb1A080762A0Fe117105Ad5715B897`
+- **AureShameStaking Contract**: `0xD2d6Ef6f7409ca48DB64Ef77D1C20832d463A22d`
 
 ---
 

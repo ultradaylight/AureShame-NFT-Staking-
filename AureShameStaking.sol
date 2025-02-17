@@ -11,11 +11,11 @@ interface IAureShame is IERC721 {
 }
 
 contract AureShameStaking is Ownable(0xCD11789CEf81Be2BCe676A34CC9331f8cE557116), ReentrancyGuard {
-    address public constant AURESHAME_NFT_ADDRESS = 0xE0300Fb1A0ecB5C5B15c53e45de6a71ed66Af0d5;
+    address public constant AURESHAME_NFT_ADDRESS = 0x55d8C2012a5C047162A1F20991Cf462f68f24E6E;
     IAureShame public immutable nftContract = IAureShame(AURESHAME_NFT_ADDRESS);
     IERC20 public immutable rewardToken;
 
-    uint256 public constant REWARD_PER_DAY = 100 * 10**18; // Adjusted for Aurelips decimals
+    uint256 public constant REWARD_PER_DAY = 10 * 10**18; // Adjusted for Aurelips decimals
     uint256 public constant REWARD_PER_HOUR = REWARD_PER_DAY / 24;
     uint256 public constant CLAIM_COOLDOWN = 1 hours;
     uint256 public constant MIN_STAKING_PERIOD = 24 hours;
@@ -83,13 +83,17 @@ contract AureShameStaking is Ownable(0xCD11789CEf81Be2BCe676A34CC9331f8cE557116)
         require(nftContract.ownerOf(stakeInfo.tokenId) == address(this), "NFT not properly staked"); // Verify ownership
         require(block.timestamp - stakeInfo.stakedAt >= MIN_STAKING_PERIOD, "Must stake for at least 24 hours");
 
-        claimRewards();
+        // Transfer NFT first to prevent reentrancy risks
         nftContract.transferFrom(address(this), msg.sender, stakeInfo.tokenId);
+        
+        // Claim rewards after NFT transfer
+        claimRewards();
+        
+        // Remove stake info after all operations
         delete stakes[msg.sender];
 
         emit Unstaked(msg.sender, stakeInfo.tokenId);
     }
-
 
     function withdrawTokens(uint256 amount) external onlyOwner {
         require(rewardToken.balanceOf(address(this)) >= amount, "Insufficient balance");

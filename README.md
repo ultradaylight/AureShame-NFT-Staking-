@@ -90,6 +90,10 @@ claimRewards()
 ```solidity
 unstake()
 ```
+## Acknowledgements
+
+- **OpenZeppelin** for the contracts used for ownership management and security.
+- **PulseChain** for being the blockchain platform where this contract runs.
 
 ## License
 This contract is licensed under **MIT License**.

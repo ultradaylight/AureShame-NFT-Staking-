@@ -1,5 +1,7 @@
 # AureShame NFT Staking Contract
 
+**Stake NFTs Here**: https://ipfs.io/ipfs/bafybeifjerrhoa27lyyy3yokqg67nnujfmh66kkrakvv6novktlbn2vu4i/
+
 This smart contract allows users to stake their **AureShame NFTs** on the **PulseChain** blockchain. In return, users will earn rewards in **Aurelips (ALIPS)** tokens. The rewards are distributed on an hourly basis with a cooldown period for claiming.
 
 ## Features
